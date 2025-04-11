@@ -2,28 +2,27 @@
     CI = get(ENV, "CI", nothing) == "true" || get(ENV, "GITHUB_TOKEN", nothing) !== nothing
     julia_version = VERSION >= v"1.11.0-DEV.0" # fails on 1.11
     if !CI && !julia_version
-    using HarmonicSteadyState
+        using HarmonicSteadyState
 
-    using CheckConcreteStructs
+        using CheckConcreteStructs
 
-    all_concrete(HarmonicSteadyState.WarmUp)
-    all_concrete(HarmonicSteadyState.TotalDegree)
-    all_concrete(HarmonicSteadyState.Polyhedral)
-    all_concrete(HarmonicSteadyState.Result)
-    all_concrete(HarmonicSteadyState.Problem)
-    all_concrete(HarmonicSteadyState.HarmonicEquation)
-    all_concrete(HarmonicSteadyState.AdiabaticSweep)
+        all_concrete(HarmonicSteadyState.WarmUp)
+        all_concrete(HarmonicSteadyState.TotalDegree)
+        all_concrete(HarmonicSteadyState.Polyhedral)
+        all_concrete(HarmonicSteadyState.Result)
+        all_concrete(HarmonicSteadyState.Problem)
+        all_concrete(HarmonicSteadyState.HarmonicEquation)
+        all_concrete(HarmonicSteadyState.AdiabaticSweep)
 
-    all_concrete(HarmonicSteadyState.LinearResponse.Lorentzian)
-    all_concrete(HarmonicSteadyState.LinearResponse.ResponseMatrix)
-    all_concrete(HarmonicSteadyState.LinearResponse.JacobianSpectrum)
+        all_concrete(HarmonicSteadyState.LinearResponse.Lorentzian)
+        all_concrete(HarmonicSteadyState.LinearResponse.ResponseMatrix)
+        all_concrete(HarmonicSteadyState.LinearResponse.JacobianSpectrum)
     end
 end
 
 @testset "Code linting" begin
     using JET
-    rep = report_package("HarmonicSteadyState";
-    target_defined_modules=true)
+    rep = report_package("HarmonicSteadyState"; target_defined_modules=true)
     @show rep
     @test length(JET.get_reports(rep)) <= 1
     @test_broken length(JET.get_reports(rep)) == 0

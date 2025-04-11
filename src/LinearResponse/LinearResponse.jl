@@ -19,9 +19,7 @@ using HarmonicSteadyState:
     _free_symbols,
     get_response_matrix
 
-using QuestBase:
-    HarmonicVariable,
-    substitute_all
+using QuestBase: HarmonicVariable, substitute_all
 
 include("types.jl")
 include("utils.jl")
